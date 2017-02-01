@@ -5,6 +5,8 @@
 
 # participants0
 
+[![Join the chat at https://gitter.im/Arquisoft/participants3a](https://badges.gitter.im/Arquisoft/participants3a.svg)](https://gitter.im/Arquisoft/participants3a?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Join the chat at https://gitter.im/Arquisoft/participants0](https://badges.gitter.im/Arquisoft/participants0.svg)](https://gitter.im/Arquisoft/participants0?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Skeleton of participants module
