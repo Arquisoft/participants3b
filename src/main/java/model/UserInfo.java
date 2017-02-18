@@ -1,7 +1,10 @@
 package model;
 
+import java.sql.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,53 +15,96 @@ public class UserInfo {
 	private static final Logger LOG = LoggerFactory.getLogger(UserInfo.class);
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-    private final String name;
-    private final Integer age;
-    private final boolean admin;
-    private final String pass; 
-    private final String email;
-    
+	private String usuario;
+	private String pass;
+	private String email;
+	
+	private String dni;
+	private String nombre;
+	private String apellidos;
+	
+	@Temporal(TemporalType.DATE)
+	private Date fechaNacimiento;
 
-    public UserInfo(String name, Integer age, boolean admin, String pass, String email) {
-    	super();
-    	LOG.info("Creating user " + name + ". age: " + age);
-        this.name = name;
-        this.age = age;
-        this.admin=admin;
-        this.email=email;
-        this.pass=pass;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-	public Long getId() {
-		return id;
+	private String direccion;
+	private String nacionalidad;
+	
+	
+	UserInfo(){}
+	
+	public UserInfo(String usuario, String pass, String email,
+			String dni, String nombre, String apellidos, Date fechaNacimiento,
+			String direccion, String nacionalidad) {
+		super();
+		this.usuario = usuario;
+		this.pass = pass;
+		this.email = email;
+		this.dni = dni;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.fechaNacimiento = fechaNacimiento;
+		this.direccion = direccion;
+		this.nacionalidad = nacionalidad;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	
+	public String getUsuario() {
+		return usuario;
 	}
-
-	public boolean isAdmin() {
-		return admin;
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
-
 	public String getPass() {
 		return pass;
 	}
-
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
 	public String getEmail() {
 		return email;
 	}
-
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getDni() {
+		return dni;
+	}
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellidos() {
+		return apellidos;
+	}
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+	public String getDireccionPostal() {
+		return direccion;
+	}
+	public void setDireccionPostal(String direccionPostal) {
+		this.direccion = direccionPostal;
+	}
+	public String getNacionalidad() {
+		return nacionalidad;
+	}
+	public void setNacionalidad(String nacionalidad) {
+		this.nacionalidad = nacionalidad;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -66,7 +112,6 @@ public class UserInfo {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -83,12 +128,7 @@ public class UserInfo {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "UserInfo [id=" + id + ", name=" + name + ", age=" + age
-				+ ", admin=" + admin + ", pass=" + pass + ", email=" + email
-				+ "]";
-	}
+	
+    
     
 }

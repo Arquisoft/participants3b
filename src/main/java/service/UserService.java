@@ -9,22 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import persistence.UserInfoDao;
 
-@Service
+
+@Service("userService") 
 @Transactional
-public class UserService {
+public interface UserService {
 
-	protected static Logger logger = Logger.getLogger("GreetingService");
+	
 
-	@Autowired
-	private UserInfoDao userDao;
-
-	public List<UserInfo> getAllGreetings() {		
-		return userDao.getAllUsers();		
-	}
-
-	public void addGreeting(UserInfo user) {		
-		userDao.addUser(user);
-	}
+	public List<UserInfo> getAllUsers();
+	public UserInfo findLoggableUser(String user, String password);
+	public void addUser(UserInfo user);
 
 
 }

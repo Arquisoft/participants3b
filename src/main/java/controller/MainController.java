@@ -1,11 +1,14 @@
-package hello;
+package controller;
 
+import model.UserInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import service.UserService;
+import service.UserServiceImpl;
 
 @Controller
 public class MainController {
@@ -26,11 +29,6 @@ public class MainController {
 	public String log() {
 		return "login";
 	}
+	
 
-	@RequestMapping(value = "/citizen", 
-			method = RequestMethod.POST)
-	public String getParticipantInfo(Model modelo,@RequestBody String nombre, @RequestBody String password) {
-		modelo.addAttribute("nombre", nombre);
-		return "saludo";
-	}
 }

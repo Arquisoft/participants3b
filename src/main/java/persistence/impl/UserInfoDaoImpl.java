@@ -34,6 +34,23 @@ public class UserInfoDaoImpl implements UserInfoDao {
 			Session session = sessionFactory.getCurrentSession();	
 			session.save(user);
 		}
+		
+		/**
+		 * Metodo que actualiza la informacion de un uuario
+		 * @param user
+		 */
+		public void updateUser(UserInfo user){
+			
+		}
+
+		/**
+		 * Metodo que busca un usuario con una contraseña en la base de datos 
+		 */
+		@Override
+		public UserInfo findByLoginAndPassword(String user, String password) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	 
 	}
 

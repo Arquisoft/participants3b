@@ -1,6 +1,8 @@
 package hello;
 
 
+
+
 import model.UserInfo;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +13,7 @@ public class APIController {
 
     @RequestMapping("/user")
     public UserInfo user() {
-        return new UserInfo("pepe",0, false, null, null);
+        return new UserInfo("pepe","pass","pepe",null, null, null, null,null,null); 
     }
 
 }
