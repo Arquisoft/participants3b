@@ -19,6 +19,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 	 
 		protected static Logger logger = Logger.getLogger("UserInfoDao");
 	 
+		
 		@Autowired
 		private SessionFactory sessionFactory;
 	 
@@ -47,9 +48,11 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		 * Metodo que busca un usuario con una contraseña en la base de datos 
 		 */
 		@Override
-		public UserInfo findByLoginAndPassword(String user, String password) {
-			// TODO Auto-generated method stub
-			return null;
+		public UserInfo findByUser(String user) {
+			Session session = sessionFactory.getCurrentSession();		
+			Query q = session.createQuery("select i from UserInfo i where i.usuario==user");
+			UserInfo userInfo = (UserInfo) q.uniqueResult(); 
+		    return userInfo;		
 		}
 	 
 	}

@@ -9,6 +9,6 @@ public interface UserInfoDao {
 	
 	public List<UserInfo> getAllUsers();
 	public void addUser(UserInfo user);
-	public UserInfo findByLoginAndPassword(String user, String password);
+	public UserInfo findByUser(String user);
 	
 }

@@ -57,10 +57,10 @@ public class UserInfo {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-	public String getPass() {
+	public String getPassword() {
 		return pass;
 	}
-	public void setPass(String pass) {
+	public void setPassword(String pass) {
 		this.pass = pass;
 	}
 	public String getEmail() {
@@ -93,10 +93,10 @@ public class UserInfo {
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	public String getDireccionPostal() {
+	public String getDireccion() {
 		return direccion;
 	}
-	public void setDireccionPostal(String direccionPostal) {
+	public void setDireccion(String direccionPostal) {
 		this.direccion = direccionPostal;
 	}
 	public String getNacionalidad() {

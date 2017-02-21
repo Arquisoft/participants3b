@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>Hola</title>
+</head>
+<body>
+	<h1> Informacion personal de <span th:text="${user.usuario}"/></h1>
+	<table>
+		<tr>
+			<td>Nombre: <span th:text="${user.nombre}"/> <span th:text="${user.apellidos}"/></td>
+		</tr>
+		<tr>
+			<td>DNI:  <span th:text="${user.dni}"/></td>
+		</tr>
+		<tr>
+			<td>Email:  <span th:text="${user.email}"/></td>
+		</tr>
+		<tr>
+			<td>Fecha de nacimiento:  <span th:text="${user.fechaNacimiento}"/></td>
+		</tr>
+		<tr>
+			<td>Direccion:  <span th:text="${user.direccion}"/></td>
+		</tr>
+		<tr>
+			<td>Nacionalidad:  <span th:text="${user.nacionalidad}"/></td>
+		</tr>
+		
+		
+	</table>
+	<br/>	
+</body>
+</html>

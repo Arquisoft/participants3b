@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import persistence.UserInfoDao;
+import util.Encriptador;
+import util.ParticipantsException;
 
 
 @Service
@@ -22,9 +24,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserInfoDao userDao;
 
-	public UserServiceImpl(){
-		
-	}
+
 	public List<UserInfo> getAllGreetings() {		
 		return userDao.getAllUsers();		
 	}
@@ -44,21 +44,42 @@ public class UserServiceImpl implements UserService{
 
 	/**
 	 * Metodo que busca el usuario y compara la contraseña para inciar sesion 
-	 * De lograr el inicio de sesion retorna la informacion del usuario
+	 * De lograrlo retorna el usuario 
+	 * @throws ParticipantsException 
 	 */
 	@Override
-	public UserInfo findLoggableUser(String user, String password) {
-		// TODO Auto-generated method stub
+	public UserInfo findLoggableUser(String user, String password) throws ParticipantsException {
+		UserInfo userInfo = userDao.findByUser(user);
+		if(userInfo==null) throw new ParticipantsException("Usuario no encontrado.");
+		try {
+			if(Encriptador.Desencriptar(userInfo.getPassword()).equals(password))
+				return userInfo;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ParticipantsException(e.getMessage());
+		}
+		
 		return null;
+		
+		
 	}
 
 	/**
 	 * Añade un usuario a la base de datos
+	 * @throws ParticipantsException 
 	 */
 	@Override
-	public void addUser(UserInfo user) {
+	public void addUser(UserInfo user) throws ParticipantsException {
+		if(userDao.findByUser(user.getUsuario())==null){
+			user.setPassword(Encriptador.encriptar(user.getPassword()));
+			userDao.addUser(user);
+		}else throw new ParticipantsException("El usuario ya existe");
+	}
+	@Override
+	public boolean changePassword(String user, String newPassword) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 }

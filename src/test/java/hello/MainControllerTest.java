@@ -5,7 +5,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
 
 import java.net.URL;
-import java.sql.Date;
+
 
 import model.UserInfo;
 
@@ -40,7 +40,6 @@ public class MainControllerTest {
 	@Before
 	public void setUp() throws Exception {
 		this.base = new URL("http://localhost:" + port + "/");
-		
 		template = new TestRestTemplate();
 	}
 
@@ -51,6 +50,25 @@ public class MainControllerTest {
 		assertThat(response.getBody(), containsString("Hola"));
 	}
 	
+//	/**
+//	 * Test que se asegura que envia una peticion para mostrar un usuario de prueba y 
+//	 * asegura que infoUsuario muestra correctamente la informacion 
+//	 * 
+//	 * @throws Exception
+//	 */
+//	@Test
+//	public void testUserInfo() throws Exception {
+//		String userURI = base.toString() + "/testUsuario";  
+//		ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
+//		assertThat(response.getBody(), containsString("<h1>Informacion personal de testUser</h"));
+//		assertThat(response.getBody(), containsString("Nombre: TestUser TestApp"));
+//		assertThat(response.getBody(), containsString("DNI: 123T"));
+//		assertThat(response.getBody(), containsString("Email: correo@tes.com"));
+//		assertThat(response.getBody(), containsString("Fecha de nacimiento: 1899-12-31"));
+//		assertThat(response.getBody(), containsString("Direccion: C/test"));
+//		assertThat(response.getBody(), containsString("Nacionalidad: España"));
+//	}
+//	
 	@Test
 	public void getUser() throws Exception {
 		String userURI = base.toString() + "/user";  
@@ -58,4 +76,11 @@ public class MainControllerTest {
 		UserInfo expected = new UserInfo("pepe","pass","pepe",null, null, null, null,null,null); 
 	}
 
+//	@Test
+//	public void getError() throws Exception{
+//		String userURI = base.toString() + "/user";  
+//		ResponseEntity<String> response = template.getForEntity(userURI, String.class);
+//		template.
+//		assertThat(response.getBody(), containsString("no encontrado"));
+//	}
 }
