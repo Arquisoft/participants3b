@@ -17,6 +17,6 @@ public interface UserService {
 	public UserInfo findLoggableUser(String user, String password) throws ParticipantsException;
 	public void addUser(UserInfo user) throws ParticipantsException;
 
-	public boolean changePassword(String user, String newPassword);
+	public void changePassword(UserInfo user, String newPassword);
 
 }

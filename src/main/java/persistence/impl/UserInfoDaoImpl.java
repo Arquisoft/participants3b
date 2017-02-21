@@ -41,7 +41,8 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		 * @param user
 		 */
 		public void updateUser(UserInfo user){
-			
+			Session session = sessionFactory.getCurrentSession();		
+			session.update(user);
 		}
 
 		/**

@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Hola</title>
+<title>Informacion de ${user.nombre}</title>
 </head>
 <body>
 	<h1> Informacion personal de <span th:text="${user.usuario}"/></h1>
@@ -24,8 +24,12 @@
 			<td>Nacionalidad:  <span th:text="${user.nacionalidad}"/></td>
 		</tr>
 		
-		
 	</table>
+	 <a href="/cambiar"> Cambiar contraseña </a>
+	<br/>
+	<br/>
+	
+	 <a href="/login"> Salir </a>
 	<br/>	
 </body>
 </html>

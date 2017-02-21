@@ -6,12 +6,14 @@ import model.UserInfo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import service.UserService;
 import service.UserServiceImpl;
+import util.Encriptador;
 import util.ParticipantsException;
 
 @Controller
@@ -43,6 +45,7 @@ public class MainController {
 		Date fecha = new Date(0, 0, 0);
 		model.addAttribute("user", new UserInfo("testUser", "ss", "email@tes.com", "123T", 
 				"TestName", "TestApp",fecha , "C/test", "España"));
+	
 		return "infoUsuario";
 	}
 
@@ -64,6 +67,48 @@ public class MainController {
 		//retornara la "web" con info del usuario
 		modelo.addAttribute("user", user);
 		return "infoUsuario";
+	}
+	
+	@RequestMapping(value = "/volverAinfo", 
+			method = RequestMethod.POST)
+	public String getParticipantInfo(Model modelo,@ModelAttribute("user") UserInfo usuario) {
+		modelo.addAttribute("user", usuario);
+		return "infoUsuario";
+	}
+	
+	@RequestMapping(value = "/cambiar")
+	public String navegarCambiarContrasena(Model modelo)
+	{
+		modelo.addAttribute("err", " ");
+		return "cambiar";
+	}
+
+	
+	@RequestMapping(value = "/cambio", 
+			method = RequestMethod.POST)
+	public String changePassword(Model modelo,@ModelAttribute("user") UserInfo usuario, @RequestBody String password,
+			@RequestBody String newPassword1, String newPassword2){
+		userService = new UserServiceImpl();
+		try {
+			if(!password.equals(Encriptador.Desencriptar(usuario.getPassword()))){
+				modelo.addAttribute("err", "Contraseña no valida");
+				return "cambiar";
+			}
+			if(!newPassword1.equals(newPassword2)){
+				modelo.addAttribute("err", "Las contraseñas deben coincidir");
+				return "cambiar";
+			}
+			userService.changePassword(usuario, newPassword1);
+			modelo.addAttribute("err","");
+			modelo.addAttribute("user", usuario);
+			modelo.addAttribute("success","Se ha actualizado la contraseña correctamente");
+			return "exito";
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelo.addAttribute("err",e.getMessage());
+			return "error";
+		}
 	}
 	
 

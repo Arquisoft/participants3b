@@ -76,10 +76,15 @@ public class UserServiceImpl implements UserService{
 			userDao.addUser(user);
 		}else throw new ParticipantsException("El usuario ya existe");
 	}
+	
+	
 	@Override
-	public boolean changePassword(String user, String newPassword) {
-		// TODO Auto-generated method stub
-		return false;
+	public void changePassword(UserInfo user, String newPassword) {
+		
+		if(userDao.findByUser(user.getUsuario())!=null){
+			user.setPassword(Encriptador.encriptar(newPassword));
+			userDao.updateUser(user);
+		}
 	}
 
 }
