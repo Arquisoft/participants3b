@@ -12,8 +12,7 @@
 			<td>DNI:  <span th:text="${user.dni}"/></td> 
 		</tr>
 		<tr>
-			<td>Email:  <input id="lbl_email" type="text" value="${user.email}" /> <span th:text="${user.email}"/>   
-                <input id="btn_email" type="submit" value="Cambiar email"/> </td> 
+			<td>Email:<span th:text="${user.email}"/>   </td> 
 		</tr>
 		<tr>
 			<td>Fecha de nacimiento:  <span th:text="${user.fechaNacimiento}"/></td>
@@ -26,12 +25,13 @@
 		</tr>
 		
 	</table>
-	
+	<a href = "/cambiarE"> Cambiar email</a>
 	 <a href="/cambiar"> Cambiar contraseña </a>
+	 
 	<br/>
 	<br/>
 	
-	 <a href="/login"> Salir </a>
+	 <a href="/inicio"> Salir </a>
 	<br/>	
 
 </body>
