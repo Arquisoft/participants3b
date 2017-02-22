@@ -1,7 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -18,9 +18,11 @@ public class UserInfo implements Serializable{
 	@Temporal(TemporalType.DATE) private Date fechaNacimiento;
 	private String direccion;
 	private String nacionalidad;
+	@Column(name = "DNI")
 	@NotNull private String dni;
 	
 	private String usuario;
+	@Column(name = "password")
 	private String pass;
 	
 	UserInfo(){}

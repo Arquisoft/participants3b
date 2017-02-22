@@ -2,6 +2,8 @@ package persistence.util;
 
 import java.util.List;
 
+import javax.jws.soap.SOAPBinding.Use;
+
 import model.UserInfo;
 
 public class UserInfoFinder {
@@ -16,6 +18,9 @@ public class UserInfoFinder {
 	}
 	
 	public static UserInfo findByUser(String user){
-		return Jpa.getManager().createNamedQuery("Citizen.findByUser", UserInfo.class).setParameter(1,user).getSingleResult();
+		List<UserInfo>r = Jpa.getManager().createNamedQuery("Citizen.findByUser", UserInfo.class).setParameter(1,user).getResultList();
+		if(r.isEmpty())return null;
+		
+		return r.get(0);
 	}
 }

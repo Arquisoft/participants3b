@@ -43,7 +43,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
 			trx.begin();
 			if(UserInfoFinder.findByUser(user.getUsuario())==null){
 				Jpa.getManager().persist(user);
-				
 			}else{
 				System.err.println("[BD] Usuario ya existe en la base de datos");
 			}
