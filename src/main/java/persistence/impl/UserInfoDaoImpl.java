@@ -22,7 +22,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		
 		@Autowired
 		private SessionFactory sessionFactory;
-	 
+		
 		public List<UserInfo> getAllUsers() {
 			Session session = sessionFactory.getCurrentSession();		
 			Query q = session.createQuery("select i from UserInfo i order by id desc");

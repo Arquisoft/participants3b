@@ -18,5 +18,5 @@ public interface UserService {
 	public void addUser(UserInfo user) throws ParticipantsException;
 
 	public void changePassword(UserInfo user, String newPassword);
-
+	public void changeEmail(UserInfo user, String email);
 }

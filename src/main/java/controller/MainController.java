@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import service.UserService;
 import service.UserServiceImpl;
@@ -43,7 +44,7 @@ public class MainController {
 	public String testUsuario(Model model) {
 		@SuppressWarnings("deprecation")
 		Date fecha = new Date(0, 0, 0);
-		model.addAttribute("user", new UserInfo("testUser", "ss", "email@tes.com", "123T", 
+		model.addAttribute("user", new UserInfo("testUser", Encriptador.encriptar("ss"), "email@tes.com", "123T", 
 				"TestName", "TestApp",fecha , "C/test", "España"));
 	
 		return "infoUsuario";
@@ -52,7 +53,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/login", 
 			method = RequestMethod.POST)
-	public String getParticipantInfo(Model modelo,@RequestBody String nombre, @RequestBody String password) {
+	public String getParticipantInfo(Model modelo,@RequestParam String nombre, @RequestParam String password) {
 	
 		userService= new UserServiceImpl();
 		UserInfo user;
@@ -80,24 +81,31 @@ public class MainController {
 	public String navegarCambiarContrasena(Model modelo)
 	{
 		modelo.addAttribute("err", " ");
-		return "cambiar";
+		return "cambiarPass";
 	}
 
 	
 	@RequestMapping(value = "/cambio", 
 			method = RequestMethod.POST)
-	public String changePassword(Model modelo,@ModelAttribute("user") UserInfo usuario, @RequestBody String password,
-			@RequestBody String newPassword1, String newPassword2){
+	public String changePassword(Model modelo,@ModelAttribute("user") UserInfo usuario, @RequestParam String password,
+			@RequestParam String newPassword1,@RequestParam String newPassword2){
 		userService = new UserServiceImpl();
 		try {
+			
 			if(!password.equals(Encriptador.Desencriptar(usuario.getPassword()))){
-				modelo.addAttribute("err", "Contraseña no valida");
-				return "cambiar";
+				modelo.addAttribute("err", "Contraseña no incorrecta");
+				return "cambiarPass";
+			}
+			if(newPassword1.length()<=0) {
+				modelo.addAttribute("err", "Escriba la nueva contraseña");
+				return "cambiarPass";
 			}
 			if(!newPassword1.equals(newPassword2)){
 				modelo.addAttribute("err", "Las contraseñas deben coincidir");
-				return "cambiar";
+				return "cambiarPass";
 			}
+			
+			modelo.addAttribute("err", "");
 			userService.changePassword(usuario, newPassword1);
 			modelo.addAttribute("err","");
 			modelo.addAttribute("user", usuario);

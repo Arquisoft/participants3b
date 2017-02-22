@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import persistence.UserInfoDao;
+import persistence.impl.UserInfoDaoImpl;
 import util.Encriptador;
 import util.ParticipantsException;
 
@@ -22,12 +23,10 @@ import util.ParticipantsException;
 public class UserServiceImpl implements UserService{
 
 	@Autowired
-	private UserInfoDao userDao;
+	private UserInfoDao userDao = new UserInfoDaoImpl();
 
 
-	public List<UserInfo> getAllGreetings() {		
-		return userDao.getAllUsers();		
-	}
+
 
 	public void addGreeting(UserInfo user) {		
 		userDao.addUser(user);
@@ -38,8 +37,7 @@ public class UserServiceImpl implements UserService{
 	 */
 	@Override
 	public List<UserInfo> getAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.getAllUsers();
 	}
 
 	/**
@@ -87,4 +85,12 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	@Override
+	public void changeEmail(UserInfo user, String email) {
+		if(userDao.findByUser(user.getUsuario())!=null){
+			user.setEmail(email);
+			userDao.updateUser(user);
+		}
+	}
+	
 }

@@ -1,4 +1,4 @@
-package util;
+package persistence.util;
 import java.io.IOException;
 
 import javax.persistence.EntityManager;
