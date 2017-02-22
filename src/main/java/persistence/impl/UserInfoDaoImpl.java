@@ -3,6 +3,8 @@ package persistence.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import model.UserInfo;
 
 import org.apache.log4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import persistence.UserInfoDao;
 
 @Repository
+@Transactional
 public class UserInfoDaoImpl implements UserInfoDao {
 	 
 		protected static Logger logger = Logger.getLogger("UserInfoDao");
@@ -52,6 +55,14 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		public UserInfo findByUser(String user) {
 			Session session = sessionFactory.getCurrentSession();		
 			Query q = session.createQuery("select i from UserInfo i where i.usuario==user");
+			UserInfo userInfo = (UserInfo) q.uniqueResult(); 
+		    return userInfo;		
+		}
+
+		@Override
+		public UserInfo find(String login, String password) {
+			Session session = sessionFactory.getCurrentSession();		
+			Query q = session.createQuery("select i from users i where i.name==user and i.contraseña==password");
 			UserInfo userInfo = (UserInfo) q.uniqueResult(); 
 		    return userInfo;		
 		}

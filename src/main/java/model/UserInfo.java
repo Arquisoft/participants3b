@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TUsers")
+@Table(name = "users")
 public class UserInfo {
 	
 	// Log

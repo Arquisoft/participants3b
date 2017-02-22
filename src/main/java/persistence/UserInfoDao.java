@@ -11,4 +11,5 @@ public interface UserInfoDao {
 	public void addUser(UserInfo user);
 	public UserInfo findByUser(String user);
 	public void updateUser(UserInfo user);
+	public UserInfo find(String login, String password);
 }
