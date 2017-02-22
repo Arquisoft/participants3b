@@ -1,37 +1,27 @@
 package model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
+@SuppressWarnings("serial")
 @Entity
-@Table(name = "TUsers")
-public class UserInfo {
+@Table(name="TCitizens")
+public class UserInfo implements Serializable{
 	
-	// Log
-	private static final Logger LOG = LoggerFactory.getLogger(UserInfo.class);
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) private long id;
+	private String nombre;
+	private String apellidos;
+	private String email;
+	@Temporal(TemporalType.DATE) private Date fechaNacimiento;
+	private String direccion;
+	private String nacionalidad;
+	@NotNull private String dni;
 	
 	private String usuario;
 	private String pass;
-	private String email;
-	
-	private String dni;
-	private String nombre;
-	private String apellidos;
-	
-	@Temporal(TemporalType.DATE)
-	private Date fechaNacimiento;
-
-	private String direccion;
-	private String nacionalidad;
-	
 	
 	UserInfo(){}
 	
@@ -105,13 +95,16 @@ public class UserInfo {
 	public void setNacionalidad(String nacionalidad) {
 		this.nacionalidad = nacionalidad;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
 		return result;
 	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -121,14 +114,20 @@ public class UserInfo {
 		if (getClass() != obj.getClass())
 			return false;
 		UserInfo other = (UserInfo) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (dni == null) {
+			if (other.dni != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!dni.equals(other.dni))
 			return false;
 		return true;
 	}
-	
-    
+
+
+	@Override
+	public String toString() {
+		return "Citizen [nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
+				+ ", fechaNacimiento=" + fechaNacimiento + ", direccion=" + direccion + ", nacionalidad=" + nacionalidad
+				+ ", dni=" + dni + ", password=" + pass + "]";
+	}
     
 }

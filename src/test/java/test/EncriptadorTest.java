@@ -4,9 +4,19 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
+import controller.Application;
 import util.Encriptador;
 
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(classes = Application.class)
+@WebAppConfiguration
 public class EncriptadorTest {
 
 	StringBuilder sB1 =new StringBuilder();

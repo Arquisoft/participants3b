@@ -2,7 +2,6 @@ package controller;
 
 import java.sql.Date;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
 
 import model.UserInfo;

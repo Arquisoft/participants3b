@@ -4,11 +4,19 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
   	version="2.0">
+  	
 
- 	<named-query name="User.findByIds">
-		<query>select a from User u where u.id in (?1)</query>
+	<named-query name="Citizen.findByDNI">
+		<query>select c from Citizen c where c.DNI = ?1</query>
 	</named-query>
 
+	<named-query name="Citizen.findAll">
+		<query>select c from Citizen c</query>
+	</named-query>
+
+	<named-query name="Citizen.findByUser">
+		<query>select c from Citizen c where c.usuario = ?1</query>
+	</named-query>
 	
 
 </entity-mappings>

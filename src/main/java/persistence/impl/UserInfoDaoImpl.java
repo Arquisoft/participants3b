@@ -1,18 +1,23 @@
 package persistence.impl;
 
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import model.UserInfo;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Query;
-import org.hibernate.Session;
+
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import persistence.UserInfoDao;
+import persistence.util.Jpa;
+import persistence.util.UserInfoFinder;
 
 @Repository
 public class UserInfoDaoImpl implements UserInfoDao {
@@ -24,16 +29,25 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		private SessionFactory sessionFactory;
 		
 		public List<UserInfo> getAllUsers() {
-			Session session = sessionFactory.getCurrentSession();		
-			Query q = session.createQuery("select i from UserInfo i order by id desc");
-			@SuppressWarnings("unchecked")
-			List<UserInfo> userList = q.list(); 
-		        return userList;			
+			EntityManager mapper = Jpa.createEntityManager();
+			EntityTransaction trx = mapper.getTransaction();
+			trx.begin();
+			List<UserInfo> lista = new ArrayList<UserInfo>();
+			lista = UserInfoFinder.findAll();
+		    return lista;			
 		}
 	 
 		public void addUser(UserInfo user) {
-			Session session = sessionFactory.getCurrentSession();	
-			session.save(user);
+			EntityManager mapper = Jpa.createEntityManager();
+			EntityTransaction trx = mapper.getTransaction();
+			trx.begin();
+			if(UserInfoFinder.findByUser(user.getUsuario())==null){
+				Jpa.getManager().persist(user);
+				
+			}else{
+				System.err.println("[BD] Usuario ya existe en la base de datos");
+			}
+			trx.commit();
 		}
 		
 		/**
@@ -41,8 +55,14 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		 * @param user
 		 */
 		public void updateUser(UserInfo user){
-			Session session = sessionFactory.getCurrentSession();		
-			session.update(user);
+			EntityManager mapper = Jpa.createEntityManager();
+			EntityTransaction trx = mapper.getTransaction();
+			trx.begin();
+			if(user!=null){
+				Jpa.getManager().merge(user);
+			} else System.err.println("[BD] El usuario que se intenta actualizar es invalido");
+			trx.commit();
+
 		}
 
 		/**
@@ -50,10 +70,13 @@ public class UserInfoDaoImpl implements UserInfoDao {
 		 */
 		@Override
 		public UserInfo findByUser(String user) {
-			Session session = sessionFactory.getCurrentSession();		
-			Query q = session.createQuery("select i from UserInfo i where i.usuario==user");
-			UserInfo userInfo = (UserInfo) q.uniqueResult(); 
-		    return userInfo;		
+			EntityManager mapper = Jpa.createEntityManager();
+			EntityTransaction trx = mapper.getTransaction();
+			trx.begin();
+			UserInfo userInfo= UserInfoFinder.findByUser(user);
+			if(userInfo!=null) return userInfo;
+			else System.err.println("[BD] Usuario no encontrado");
+			return userInfo;
 		}
 	 
 	}
