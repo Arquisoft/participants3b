@@ -1,0 +1,35 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Cambiar contraseña</title>
+</head>
+<body>
+	<form action="/cambioEmail" method="post">
+	<table border="0">
+        <tr>
+             <td colspan="5" align="center"><h2>Cambiar email</h2></td>
+        </tr>
+        <tr>
+        <br/>
+        <span th:text="${err}"/>
+        </tr>
+        <tr>
+            <td>Contraseña:</td>
+            <td align="right"><input type="password" name="password"/></td>
+        </tr>
+        <tr>
+            <td>Nuevo email: </td>
+            <td align="right"><input type="text" name="newEmail"/></td>
+        </tr>
+        <tr>
+            <td >
+                <input type="submit" value="Guardar cambios"/>
+            </td>
+        </tr>
+        
+    <tr><a href="/volverAinfo">Volver panel de informacion</a></tr>
+    </table>
+    </form>
+</body>
+</html>

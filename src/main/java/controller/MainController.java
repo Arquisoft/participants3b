@@ -2,6 +2,9 @@ package controller;
 
 import java.sql.Date;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSession;
+
 import model.UserInfo;
 
 import org.springframework.stereotype.Controller;
@@ -41,25 +44,26 @@ public class MainController {
 	}
 
 	@RequestMapping("/testUsuario")
-	public String testUsuario(Model model) {
+	public String testUsuario(Model model, HttpSession session) {
 		@SuppressWarnings("deprecation")
 		Date fecha = new Date(0, 0, 0);
-		model.addAttribute("user", new UserInfo("testUser", Encriptador.encriptar("ss"), "email@test.com", "123T", 
-				"TestName", "TestApp",fecha , "C/test", "España"));
-	
+		UserInfo user= new UserInfo("testUser", Encriptador.encriptar("ss"), "email@test.com", "123T", 
+				"TestName", "TestApp",fecha , "C/test", "España");
+		model.addAttribute("user", user );
+		session.setAttribute("user", user);
 		return "infoUsuario";
 	}
 
 	
 	@RequestMapping(value = "/login", 
 			method = RequestMethod.POST)
-	public String getParticipantInfo(Model modelo,@RequestParam String nombre, @RequestParam String password) {
+	public String getParticipantInfo(HttpSession session, Model modelo,@RequestParam String nombre, @RequestParam String password) {
 	
 		userService= new UserServiceImpl();
 		UserInfo user;
 		try {
 			user = userService.findLoggableUser(nombre, password);
-			
+			session.setAttribute("user", user);
 		} catch (ParticipantsException e) {
 			modelo.addAttribute("err", e.getMessage());
 			return "error";
@@ -72,8 +76,9 @@ public class MainController {
 	
 	@RequestMapping(value = "/volverAinfo", 
 			method = RequestMethod.GET)
-	public String getParticipantInfo(Model modelo,@ModelAttribute("user") UserInfo usuario) {
-		modelo.addAttribute("user", usuario);
+	public String getParticipantInfo(HttpSession session,Model modelo,@ModelAttribute("user") UserInfo usuario) {
+		modelo.addAttribute("user", session.getAttribute("user"));
+		
 		return "infoUsuario";
 	}
 	
@@ -88,12 +93,14 @@ public class MainController {
 	
 	@RequestMapping(value = "/cambioEmail", 
 			method = RequestMethod.POST)
-	public String changeEmail(Model modelo,@ModelAttribute("user") UserInfo usuario, @RequestParam String password,
+	public String changeEmail(HttpSession session, Model modelo,@ModelAttribute("user") UserInfo usuario, @RequestParam String password,
 			@RequestParam String newEmail){
 		userService = new UserServiceImpl();
+		UserInfo user = (UserInfo) session.getAttribute("user");
+		
 		try {
 			
-			if(!password.equals(Encriptador.Desencriptar(usuario.getPassword()))){
+			if(!password.equals(Encriptador.Desencriptar(user.getPassword()))){
 				modelo.addAttribute("err", "Contraseña incorrecta");
 				return "cambiarEmail";
 			}
@@ -103,9 +110,9 @@ public class MainController {
 			}
 			
 			modelo.addAttribute("err", "");
-			userService.changeEmail(usuario, newEmail);
+			userService.changeEmail(user, newEmail);
 			modelo.addAttribute("err","");
-			modelo.addAttribute("user", usuario);
+			session.setAttribute("user", user);
 			modelo.addAttribute("success","Se ha actualizado la contraseña correctamente");
 			return "exito";
 	
@@ -117,7 +124,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/cambiar")
-	public String navegarCambiarContrasena(Model modelo, @ModelAttribute("user") UserInfo usuario)
+	public String navegarCambiarContrasena( Model modelo, @ModelAttribute("user") UserInfo usuario)
 	{
 		modelo.addAttribute("user",usuario);
 		modelo.addAttribute("err", " ");
@@ -127,12 +134,13 @@ public class MainController {
 	
 	@RequestMapping(value = "/cambio", 
 			method = RequestMethod.POST)
-	public String changePassword(Model modelo,@ModelAttribute("user") UserInfo usuario, @RequestParam String password,
+	public String changePassword(HttpSession session, Model modelo,@ModelAttribute("user") UserInfo usuario, @RequestParam String password,
 			@RequestParam String newPassword1,@RequestParam String newPassword2){
 		userService = new UserServiceImpl();
+		UserInfo user = (UserInfo) session.getAttribute("user");
 		try {
 			
-			if(!password.equals(Encriptador.Desencriptar(usuario.getPassword()))){
+			if(!password.equals(Encriptador.Desencriptar(user.getPassword()))){
 				modelo.addAttribute("err", "Contraseña incorrecta");
 				return "cambiarPass";
 			}
@@ -146,9 +154,10 @@ public class MainController {
 			}
 			
 			modelo.addAttribute("err", "");
-			userService.changePassword(usuario, newPassword1);
+			userService.changePassword(user, newPassword1);
 			modelo.addAttribute("err","");
-			modelo.addAttribute("user", usuario);
+			modelo.addAttribute("user", user);
+			session.setAttribute("user", user);
 			modelo.addAttribute("success","Se ha actualizado la contraseña correctamente");
 			return "exito";
 	
