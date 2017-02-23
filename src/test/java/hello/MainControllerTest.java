@@ -42,10 +42,18 @@ public class MainControllerTest {
 
 	@Before
 	public void setUp() throws Exception {
-	
+		this.base = new URL("http://localhost:" + port + "/");
+		template = new TestRestTemplate();
 	}
 
-
+	@Test
+	public void getLanding() throws Exception {
+		@SuppressWarnings("unused")
+		String userURI = base.toString() + "/user";  
+		ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
+		assertThat(response.getBody(), containsString("Hola"));
+	}
+	
 //	/**
 //	 * Test que se asegura que envia una peticion para mostrar un usuario de prueba y 
 //	 * asegura que infoUsuario muestra correctamente la informacion 
@@ -65,7 +73,14 @@ public class MainControllerTest {
 //		assertThat(response.getBody(), containsString("Nacionalidad: España"));
 //	}
 //	
-
+	@Test
+	public void getUser() throws Exception {
+		String userURI = base.toString() + "/user";  
+		@SuppressWarnings("unused")
+		ResponseEntity<String> response = template.getForEntity(userURI, String.class);
+		@SuppressWarnings("unused")
+		UserInfo expected = new UserInfo("pepe","pass","pepe",null, null, null, null,null,null); 
+	}
 
 //	@Test
 //	public void getError() throws Exception{

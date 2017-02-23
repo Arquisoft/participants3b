@@ -28,7 +28,7 @@ public class MainController {
 	@RequestMapping("/")
 	public String landing(Model model) {
 		model.addAttribute("nombre", "Amigo");
-		return "login";
+		return "saludo";
 	}
 
 	@RequestMapping("/hola")
