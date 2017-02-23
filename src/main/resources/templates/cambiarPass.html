@@ -2,6 +2,8 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="css/error.css" type="text/css"
+	media="all"/>
 <title>Cambiar contraseña</title>
 </head>
 <body>
@@ -10,9 +12,10 @@
         <tr>
              <td colspan="5" align="center"><h2>Cambiar contraseña</h2></td>
         </tr>
-        <tr>
+        <tr><td>
         <br/>
-        <span th:text="${err}"/>
+        <span id="error" th:text="${err}"/>
+        </td>
         </tr>
         <tr>
             <td>Contraseña:</td>
@@ -31,7 +34,7 @@
                 <input type="submit" value="Cambiar"/>
             </td>
         </tr>
-   		<tr><a href="/volverAinfo">Volver panel de informacion</a></tr>
+   		<tr><td><a href="/volverAinfo">Volver panel de informacion</a></td></tr>
     </table>
     </form>
 </body>

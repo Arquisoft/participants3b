@@ -42,26 +42,45 @@ public class MainController {
 		return "login";
 	}
 
+	@RequestMapping("/salir")
+	public String salir( Model model, HttpSession session){
+		session.removeAttribute("user");
+		model.addAttribute("user", null);
+		
+		return "login";
+		
+	}
 	@RequestMapping("/testUsuario")
 	public String testUsuario(Model model, HttpSession session) {
 		@SuppressWarnings("deprecation")
 		Date fecha = new Date(0, 0, 0);
 		UserInfo user= new UserInfo("testUser", Encriptador.encriptar("ss"), "email@test.com", "123T", 
 				"TestName", "TestApp",fecha , "C/test", "España");
-		model.addAttribute("user", user );
-		session.setAttribute("user", user);
+		model.addAttribute("user",user);
+		//session.setAttribute("user", user);
 		return "infoUsuario";
 	}
 
 	
-	@RequestMapping(value = "/login", 
+	
+	@RequestMapping(value = "/entrar", 
 			method = RequestMethod.POST)
 	public String getParticipantInfo(HttpSession session, Model modelo,@RequestParam String nombre, @RequestParam String password) {
 	
+		if(nombre.length()<=0 || password.length()<=0) {
+			modelo.addAttribute("err", "Complete todos los campos");
+			return "login";
+		}
 		userService= new UserServiceImpl();
 		UserInfo user;
 		try {
 			user = userService.findLoggableUser(nombre, password);
+			if(user==null){
+				modelo.addAttribute("err", "Usuario no encontrado");
+				return "login";
+			}
+			System.err.println();
+			
 			session.setAttribute("user", user);
 		} catch (ParticipantsException e) {
 			modelo.addAttribute("err", e.getMessage());

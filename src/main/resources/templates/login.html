@@ -2,29 +2,34 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="css/error.css" type="text/css"
+	media="all"/>
 <title>Login</title>
 </head>
 <body>
-	<form action="/login" method="post">
+	<form action="entrar" method="post">
 	<table border="0">
         <tr>
              <td colspan="5" align="center"><h2>Inicie sesión</h2></td>
         </tr>
+        <tr id="err">  	
+        	<td>
+			 <span th:text="${err}"/>	
+			 </td>
+		</tr>
         <tr>
             <td>Nombre de usuario:</td>
             <td align="right"><input type="text" name="nombre"/></td>
         </tr>
         <tr>
             <td>Contraseña: </td>
-            <td align="right"><input type="password" name="pass"/></td>
+            <td align="right"><input type="password" name="password"/></td>
         </tr>
         <tr>
-            <td >
-                <input type="submit" value="Entrar"/>
-            </td>
         </tr>
         
     </table>
+    	<input type="submit" value="Entrar"/>
     </form>
 </body>
 </html>

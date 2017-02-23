@@ -2,17 +2,19 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="css/error.css" type="text/css"
+	media="all"/>
 <title>Cambiar contraseña</title>
 </head>
 <body>
 	<form action="/cambioEmail" method="post">
 	<table border="0">
-        <tr>
+        <tr >
              <td colspan="5" align="center"><h2>Cambiar email</h2></td>
         </tr>
-        <tr>
+        <tr id="err">
         <br/>
-        <span th:text="${err}"/>
+        <span  th:text="${err}"/>
         </tr>
         <tr>
             <td>Contraseña:</td>

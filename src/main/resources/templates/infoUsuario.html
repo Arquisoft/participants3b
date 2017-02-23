@@ -1,27 +1,34 @@
 <html>
 <head>
 <title>Informacion de ${user.nombre}</title>
+<link rel="stylesheet" href="css/error.css" type="text/css"
+	media="all"/>
 </head>
 <body>
-	<h1> Informacion personal de <span th:text="${user.usuario}"/></h1>
-	<table>
+	<table border="2">
 		<tr>
-			<td>Nombre: <span th:text="${user.nombre}"/> <span th:text="${user.apellidos}"/></td>
+		 <td colspan="5" align="center"><h2> Informacion personal de <span th:text="${user.usuario}"/></h2></td>
+		</tr>
+		<tr id="err">
+			 <span  th:text="${err}"/>	
 		</tr>
 		<tr>
-			<td>DNI:  <span th:text="${user.dni}"/></td> 
+			<td>	Nombre:	<span th:text="${user.nombre}"/> <span th:text="${user.apellidos}"/></td>
 		</tr>
 		<tr>
-			<td>Email:<span th:text="${user.email}"/>   </td> 
+			<td>	DNI:	<span th:text="${user.dni}"/></td> 
 		</tr>
 		<tr>
-			<td>Fecha de nacimiento:  <span th:text="${user.fechaNacimiento}"/></td>
+			<td>	Email:	<span th:text="${user.email}"/>   </td> 
 		</tr>
 		<tr>
-			<td>Direccion:  <span th:text="${user.direccion}"/></td>
+			<td>	Fecha de nacimiento: <span th:text="${user.fechaNacimiento}"/></td>
 		</tr>
 		<tr>
-			<td>Nacionalidad:  <span th:text="${user.nacionalidad}"/></td>
+			<td>	Direccion:  <span th:text="${user.direccion}"/></td>
+		</tr>
+		<tr>
+			<td>	Nacionalidad:  <span th:text="${user.nacionalidad}"/></td>
 		</tr>
 		
 	</table>
@@ -31,7 +38,7 @@
 	<br/>
 	<br/>
 	
-	 <a href="/inicio"> Salir </a>
+	 <a href="/salir"> Salir </a>
 	<br/>	
 
 </body>
