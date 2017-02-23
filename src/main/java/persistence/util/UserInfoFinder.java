@@ -2,8 +2,6 @@ package persistence.util;
 
 import java.util.List;
 
-import javax.jws.soap.SOAPBinding.Use;
-
 import model.UserInfo;
 
 public class UserInfoFinder {

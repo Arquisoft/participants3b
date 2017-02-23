@@ -30,18 +30,12 @@ public class UserInfoTest {
 	public void setUserInfo(){
 
 		
-		@SuppressWarnings("deprecation")
 		Date fecha = new Date(0, 0, 0);
 		testUser= new UserInfo("testUser1", "ss", "email@test2.com", "123", 
 				"TestName", "TestApp",fecha , "C/test1", "España");
 		testUser2= new UserInfo("testUser2", "ee", "email@test2.es", "456", 
 				"TestName2", "TestApp2",fecha , "C/test2", "Francia");
 	}
-	@Test
-	public void testAll() {
-		
-	}
-	
 	@Test
 	public void testUser(){
 		String test1 = "testUser1";

@@ -57,9 +57,8 @@ public class UserInfoDaoImpl implements UserInfoDao {
 			EntityManager mapper = Jpa.createEntityManager();
 			EntityTransaction trx = mapper.getTransaction();
 			trx.begin();
-			if(user!=null){
+			if(user!=null)
 				Jpa.getManager().merge(user);
-			} else System.err.println("[BD] El usuario que se intenta actualizar es invalido");
 			trx.commit();
 
 		}
@@ -74,7 +73,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
 			trx.begin();
 			UserInfo userInfo= UserInfoFinder.findByUser(user);
 			if(userInfo!=null) return userInfo;
-			else System.err.println("[BD] Usuario no encontrado");
 			return userInfo;
 		}
 	 
