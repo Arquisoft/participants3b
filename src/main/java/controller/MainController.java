@@ -84,7 +84,7 @@ public class MainController {
 			session.setAttribute("user", user);
 		} catch (ParticipantsException e) {
 			modelo.addAttribute("err", e.getMessage());
-			return "error";
+			return "login";
 		}
 
 		//retornara la "web" con info del usuario
