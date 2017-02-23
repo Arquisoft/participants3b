@@ -31,6 +31,8 @@ public class BDTest {
 	UserInfo testUser;
 	UserInfo testUser2;
 	
+	private UserInfoDao ueDao;
+	
 	@Before
 	public void setUp() {
 		
@@ -68,7 +70,40 @@ public class BDTest {
 	
 	}
 	
-
+	@Test
+	public void existeCiudadanoTest() {
+		UserInfo ue1= ueDao.findByUser("Seila");
+		UserInfo ue2= ueDao.findByUser("Seila2");
+		
+	
+		assertEquals("Seila", ue1.getNombre());
+		assertEquals("Seila2", ue2.getNombre());
+	}
+	
+	@Test
+	public void noExisteCiudadanoTest() {
+		UserInfo ue1= ueDao.findByUser("Miguel");
+		UserInfo ue2= ueDao.findByUser("Ivan");
+		
+	
+		assertNull(ue1);
+		assertNull(ue2);
+	}
+	
+	@Test
+	public void comprobarDatos() {
+		UserInfo ue1 = ueDao.findByUser("Seila");
+		assertEquals("Seila", ue1.getNombre());
+		assertEquals("Prada", ue1.getApellidos());
+		assertEquals("seila@hotm.com", ue1.getEmail());
+		assertEquals("BOOZ0BADDB", ue1.getPassword());
+		assertEquals("71735747N", ue1.getDni());
+		assertEquals("Seila_seila", ue1.getUsuario());
+		assertEquals("direccion", ue1.getDireccion());
+		assertEquals("2017-02-22", ue1.getFechaNacimiento());
+		
+		
+	}
 
 
 	private void borrarTester(String user){
