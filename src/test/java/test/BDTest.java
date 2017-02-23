@@ -19,7 +19,7 @@ import persistence.UserInfoDao;
 import persistence.impl.UserInfoDaoImpl;
 import persistence.util.Jpa;
 import persistence.util.UserInfoFinder;
-
+import util.Encriptador;
 import model.UserInfo;
 
 
@@ -64,7 +64,6 @@ public class BDTest {
 		borrarTester(testUser2.getUsuario());
 		
 		assertNull(UserInfoFinder.findByDNI(testUser.getDni()));
-		
 	
 	}
 	
