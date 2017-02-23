@@ -72,8 +72,8 @@ public class BDTest {
 	
 	@Test
 	public void existeCiudadanoTest() {
-		UserInfo ue1= ueDao.findByUser("Seila");
-		UserInfo ue2= ueDao.findByUser("Seila2");
+		UserInfo ue1= ueDao.findByUser("Seila_seila");
+		UserInfo ue2= ueDao.findByUser("Seila2_seila");
 		
 	
 		assertEquals("Seila", ue1.getNombre());
@@ -92,7 +92,7 @@ public class BDTest {
 	
 	@Test
 	public void comprobarDatos() {
-		UserInfo ue1 = ueDao.findByUser("Seila");
+		UserInfo ue1 = ueDao.findByUser("Seila_seila");
 		assertEquals("Seila", ue1.getNombre());
 		assertEquals("Prada", ue1.getApellidos());
 		assertEquals("seila@hotm.com", ue1.getEmail());
