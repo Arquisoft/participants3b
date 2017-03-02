@@ -43,7 +43,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 			return base64EncryptedString;
 		}
 
-		public static String Desencriptar(String textoEncriptado) throws Exception {
+		public static String desencriptar(String textoEncriptado) throws Exception {
 
 			String secretKey = "pruebacitizens3b"; 
 														

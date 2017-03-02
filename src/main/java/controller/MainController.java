@@ -118,7 +118,7 @@ public class MainController {
 		
 		try {
 			
-			if(!password.equals(Encriptador.Desencriptar(user.getPassword()))){
+			if(!password.equals(Encriptador.desencriptar(user.getPassword()))){
 				modelo.addAttribute("err", "Contraseña incorrecta");
 				return "cambiarEmail";
 			}
@@ -158,7 +158,7 @@ public class MainController {
 		UserInfo user = (UserInfo) session.getAttribute("user");
 		try {
 			
-			if(!password.equals(Encriptador.Desencriptar(user.getPassword()))){
+			if(!password.equals(Encriptador.desencriptar(user.getPassword()))){
 				modelo.addAttribute("err", "Contraseña incorrecta");
 				return "cambiarPass";
 			}

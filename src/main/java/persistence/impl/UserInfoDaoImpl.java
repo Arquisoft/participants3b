@@ -11,9 +11,7 @@ import model.UserInfo;
 
 import org.apache.log4j.Logger;
 
-import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import persistence.UserInfoDao;
 import persistence.util.Jpa;
@@ -23,10 +21,6 @@ import persistence.util.UserInfoFinder;
 public class UserInfoDaoImpl implements UserInfoDao {
 	 
 		protected static Logger logger = Logger.getLogger("UserInfoDao");
-	 
-		
-		@Autowired
-		private SessionFactory sessionFactory;
 		
 		public List<UserInfo> getAllUsers() {
 			EntityManager mapper = Jpa.createEntityManager();

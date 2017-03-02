@@ -35,8 +35,8 @@ public class EncriptadorTest {
 		String desencriptado1="";
 		String desencriptado2="";
 		try {
-			desencriptado1 = Encriptador.Desencriptar(encriptado);
-			desencriptado2 = Encriptador.Desencriptar(encriptado2);
+			desencriptado1 = Encriptador.desencriptar(encriptado);
+			desencriptado2 = Encriptador.desencriptar(encriptado2);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

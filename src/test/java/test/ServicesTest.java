@@ -46,7 +46,7 @@ public class ServicesTest{
 		
 		uS.addUser(testUser);
 		
-		UserInfo uI = uS.findLoggableUser(testUser.getUsuario(), Encriptador.Desencriptar(testUser.getPassword()));
+		UserInfo uI = uS.findLoggableUser(testUser.getUsuario(), Encriptador.desencriptar(testUser.getPassword()));
 		assertNotNull(uI);
 		
 		String nuevoEmail = "nuevoEmail@test3.es";
@@ -59,7 +59,7 @@ public class ServicesTest{
 		assertNotNull(uI);
 		
 		assertEquals(nuevoEmail, uI.getEmail());
-		assertEquals(nuevaPassword, Encriptador.Desencriptar(uI.getPassword()));
+		assertEquals(nuevaPassword, Encriptador.desencriptar(uI.getPassword()));
 		
 		limpiarTest();
 	}

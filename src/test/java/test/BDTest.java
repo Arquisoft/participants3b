@@ -3,6 +3,8 @@ package test;
 import static org.junit.Assert.*;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.util.Calendar;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +18,7 @@ import persistence.UserInfoDao;
 import persistence.impl.UserInfoDaoImpl;
 import persistence.util.UserInfoFinder;
 import util.EliminarTester;
+import util.Encriptador;
 import model.UserInfo;
 
 
@@ -33,6 +36,7 @@ public class BDTest {
 	public void setUp() {
 		
 		userDao=new UserInfoDaoImpl();
+		@SuppressWarnings("deprecation")
 		Date fecha = new Date(0, 0, 0);
 		testUser= new UserInfo("Ivan2", "iv", "email@test2.com", "123", 
 				"TestName", "TestApp",fecha , "C/test1", "España");
@@ -42,13 +46,14 @@ public class BDTest {
 		limpiarTest();
 	}
 	
+
 	@Test
 	public void testFinder(){
 		
 		UserInfoDao uDao = new UserInfoDaoImpl();
 		uDao.addUser(testUser);
 		uDao.addUser(testUser2);
-
+		
 		UserInfo encontrado1=UserInfoFinder.findByDNI(testUser.getDni());
 		UserInfo encontrado2= UserInfoFinder.findByUser(testUser2.getUsuario());
 		assertNotNull(encontrado1);

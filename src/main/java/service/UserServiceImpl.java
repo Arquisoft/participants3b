@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService{
 		UserInfo userInfo = userDao.findByUser(user);
 		if(userInfo==null) throw new ParticipantsException("Usuario no encontrado.");
 		try {
-			if(Encriptador.Desencriptar(userInfo.getPassword()).equals(password))
+			if(Encriptador.desencriptar(userInfo.getPassword()).equals(password))
 				return userInfo;
 			
 		} catch (Exception e) {
